@@ -3,8 +3,9 @@ A powerful, modern Vim configuration inspired by EuclidaeZ and NvChad, designed 
 Features
 
 Core Functionality: Syntax highlighting, auto-indentation, true color support, and persistent undo.
-Plugins: Includes coc.nvim (LSP), vimspector (debugging), NERDTree (file explorer), fzf.vim (fuzzy finder), vim-airline (status/tabline), and more.
+Plugins: Includes coc.nvim (LSP), vimspector (debugging), NERDTree (file explorer), fzf.vim (fuzzy finder), vim-airline (status/tabline), image.vim (image preview), and more.
 Language Support: Rust, C++, Zig, Java, GLSL, Python, JavaScript, and more, with language-specific key mappings and tools.
+Multimedia: Preview images (PNG, JPG, JPEG) as ASCII art using image.vim.
 UI Enhancements: onedark theme, powerline fonts, indentation guides, and a customizable startup screen with vim-startify.
 Key Mappings: Intuitive shortcuts for navigation, code execution, debugging, and Git integration.
 Automation: Auto-reload vimrc, auto-create directories on save, and highlight-on-yank.
@@ -40,6 +41,15 @@ For LSP support, run::CocInstall
 This installs language servers like coc-rust-analyzer, coc-clangd, etc.
 
 
+Install Image Preview Dependencies:
+For image.vim, install the Python Imaging Library (Pillow):pip install Pillow
+
+
+Ensure Vim has Python support:sudo dnf install vim-python3
+
+
+
+
 Optional Dependencies:
 For Rust (crates.nvim), ensure cargo is installed:sudo dnf install cargo
 
@@ -60,6 +70,7 @@ hi LineNr guibg=NONE ctermbg=NONE
 hi SignColumn guibg=NONE ctermbg=NONE
 
 
+To preview images, open a .png, .jpg, or .jpeg file in Vim, and image.vim will automatically render an ASCII preview.
 
 Shortcuts
 The configuration uses <Space> as the leader key (<leader>) and local leader key (<localleader>).
@@ -116,6 +127,7 @@ Search and Replace
 
 <leader>s (normal mode): Replace word under cursor (:%s/<word>)
 <leader>s (visual mode): Replace in selection (:s/%V)
+<leader>h : Clear search highlights (:nohlsearch)
 
 Line Movement
 
@@ -198,6 +210,10 @@ Motion (vim-easymotion)
 <leader>j : Jump to character (single-char search)
 <leader>J : Jump to two characters (two-char search)
 
+Image Preview (image.vim)
+
+No explicit shortcut; automatically displays ASCII art when opening .png, .jpg, or .jpeg files.
+
 Language-Specific Settings
 
 Rust: Auto-formats on save with rustfmt.
@@ -216,13 +232,17 @@ vimspector: Configured for C++, Java, Python, and Rust debugging.
 fzf.vim: Customizable file and content search with split/tab options.
 vim-startify: Displays sessions, recent files, and bookmarks on startup.
 crates.nvim: Enhances Rust Cargo.toml editing with version/feature popups.
-ale: Provides linting for Python, JavaScript, Rust, and C++.
-vim-fugitive/vim-gitgutter: Git integration with status, commit, and diff markers.
+ale: Provides linting for Python, JavaScript
+
+, Rust, and C++.
+
+image.vim: Renders ASCII previews of .png, .jpg, and .jpeg files using Pillow. Requires Python support in Vim.
 
 Troubleshooting
 
 Plugins Fail to Load: Run :PlugInstall or check ~/.vim/plugged/ for issues.
 LSP Errors: Ensure language servers are installed (:CocInstall) and dependencies (e.g., rust-analyzer, clangd) are available.
+Image Preview Issues: Verify Pillow is installed (pip install Pillow) and Vim has Python support (:echo has('python3')). Install vim-python3 if needed.
 Slow Performance: Disable ale (let g:ale_enabled = 0) if coc.nvim is sufficient for linting.
 Transparency Issues: Ensure your terminal supports true colors and transparency.
 
